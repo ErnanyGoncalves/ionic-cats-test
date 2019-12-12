@@ -1,0 +1,84 @@
+<ion-grid>
+  <!-- Only images style -->
+  <ion-row *ngIf="currentViewStyle=='only-image'">
+    <ion-col *ngFor="let cat of catsImageList" size="6" size-lg="4">
+      <ion-img [src]="cat.imageUrl" [alt]="cat.title"></ion-img>
+    </ion-col>
+  </ion-row>
+
+  <!-- Cards style -->
+  <ion-row *ngIf="currentViewStyle=='cards'">
+    <ion-col *ngFor="let cat of catsImageList" size="12" size-md="6" size-lg="4">
+      <ion-card>
+        <ion-card-header  class="ion-no-padding">
+          <ion-img [src]="cat.imageUrl" [alt]="cat.title"></ion-img>
+          <ion-card-title class="ion-padding ion-text-center">{{cat.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row class="ion-text-center">
+              <ion-col size="4">
+                <ion-label>{{cat.views}} <ion-icon color="tertiary" slot="end" name="eye"></ion-icon>
+                </ion-label>
+              </ion-col>
+              <ion-col size="4">
+                <ion-label>{{cat.ups}} <ion-icon color="success" slot="end" name="thumbs-up"></ion-icon>
+                </ion-label>
+              </ion-col>
+              <ion-col size="4">
+                <ion-label>{{cat.downs}} <ion-icon color="danger" slot="end" name="thumbs-down"></ion-icon>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- Complete information style -->
+  <ion-row *ngIf="currentViewStyle=='complete-info'">
+    <ion-col *ngFor="let cat of catsImageList" size="12" size-md="6" size-lg="4">
+      <ion-card>
+        <ion-card-header class="ion-no-padding">
+          <ion-img [src]="cat.imageUrl" [alt]="cat.title"></ion-img>
+          <div padding>
+            <ion-card-title class="ion-text-center">{{cat.title}}</ion-card-title>
+            <ion-card-subtitle>
+              By: <a (click)="openBrowser(cat.userUrl)">{{cat.user}}</a>
+            </ion-card-subtitle>
+          </div>
+        </ion-card-header>
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row text-center>
+              <ion-col size="12">
+                <ion-label><a (click)="openBrowser(cat.postLink)">Original Post</a></ion-label>
+              </ion-col>
+              <ion-col size="4">
+                <ion-label>{{cat.views}} <ion-icon color="tertiary" slot="end" name="eye"></ion-icon>
+                </ion-label>
+              </ion-col>
+              <ion-col size="4">
+                <ion-label>{{cat.ups}} <ion-icon color="success" slot="end" name="thumbs-up"></ion-icon>
+                </ion-label>
+              </ion-col>
+              <ion-col size="4">
+                <ion-label>{{cat.downs}} <ion-icon color="danger" slot="end" name="thumbs-down"></ion-icon>
+                </ion-label>
+              </ion-col>
+              <ion-col size="12">
+                <ion-label>{{cat.datetime}}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title text-center>Imgur API Test - Cats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+  <div text-center>
+    <ion-button [disabled]="currentStyle==='only-image'" (click)="setViewStyle('only-image')">
+      Images
+      <ion-icon name="apps" slot="end"></ion-icon>
+    </ion-button>
+    <ion-button [disabled]="currentStyle==='cards'" (click)="setViewStyle('cards')">
+      Cards
+      <ion-icon name="image" slot="end"></ion-icon>
+    </ion-button>
+    <ion-button [disabled]="currentStyle==='complete-info'" (click)="setViewStyle('complete-info')">
+      Informative
+      <ion-icon name="analytics" slot="end"></ion-icon>
+    </ion-button>
+  </div>
+  <app-grid *ngIf="!isLoading" [currentViewStyle]="currentStyle" [apiRes]="catsList"></app-grid>
+  
+</ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "ionic-cats-test",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
